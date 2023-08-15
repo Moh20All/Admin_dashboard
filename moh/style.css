@@ -1,0 +1,245 @@
+:root {
+  --blue-color: #0075ff;
+  --blue-alt-color: #0d69d5;
+  --orange-color: #f59e0b;
+  --green-color: #22c55e;
+  --red-color: #f44336;
+  --grey-color: #888;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: "Open Sans", sans-serif;
+  margin: 0;
+}
+*:focus {
+  outline: none;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+ul {
+  list-style: none;
+  padding: 0;
+}
+.side-panel{
+	background-color: white;
+  width: 250px;
+  box-shadow: 0 0 10px #999;
+}
+.side-panel ul li a span{
+  margin-left: 10px;
+}
+.side-panel ul li a:hover,.side-panel ul li a:active{
+  background-color: #f6f6f6;
+}
+.main-content{
+	background-color: #f1f5f9;
+	width: 100%;
+}
+.search{
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-left: 5px;
+  padding-left: 30px;
+  width: 150px;
+  height: 38px;
+  transition: width 0.3s;
+  position: relative;
+}
+.search:focus{
+  width: 180px;
+}
+.search::before{
+  font-family: var(--fa-style-family-classic);
+  content: "\f002";
+  font-weight: 900;
+  position: absolute;
+  left: 15px;
+  top: 50.00001%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: black;
+}
+.head{
+  background-color: white;
+}
+.page{
+	min-height: 100vh;
+}
+.notification{
+  padding: 5px;
+  position: relative;
+  color: black;
+}
+
+.notification img{
+  border-radius:50% ;
+  width: 35px;
+  margin-left: 15px;
+}
+.title{
+  margin: 20px 20px 40px;
+}
+.title::after{
+  content: "";
+  width: 120px;
+  height: 3px;
+  background-color: white;
+  position: absolute;
+  bottom: -5px;left: 0;
+}
+.title::before{
+  content: "";
+  width: 40px;
+  height: 3px;
+  background-color: black;
+  position: absolute;
+  bottom: -5px;left: 0;
+  z-index: 999;
+}
+.avatar-box>img{
+  width: 120px;
+}
+.avatar-box .level{
+  height: 6px;
+  overflow: hidden;
+  margin: auto;
+  width: 70%;
+}
+.avatar-box .level span{
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background-color: var(--blue-color);
+  border-radius: 6px;
+}
+.avatar-box{
+  width: 300px;
+}
+.rating{
+  color: var(--orange-color);
+}
+@media (min-width: 768px){
+.main-content .avatar-box {
+    border-right: 1px solid #eee;
+}
+}
+
+.info-box .box>h3{
+  font-weight: 500;
+  font-size: 16px;
+}
+.info-box .box {
+  flex-wrap: wrap;
+  border-bottom: 1px solid #eee;
+  transition: 0.3s;
+}
+.info-box .box:hover {
+  background-color: #eee;
+}
+.info-box .box>div {
+min-width: 250px;
+  padding: 10px 0 0;
+}
+/*Customers*/
+.Customers-table table{
+  border-collapse: collapse;
+  overflow-x: hidden;
+  min-width: 1000px;
+}
+.Customers-table table thead th{
+  padding: 15px ;
+  background-color: #eee;
+  text-align: start;
+}
+.Customers-table table tbody td{
+  padding: 15px ;
+  border-bottom: 1px solid #eee;
+  border-left: 1px solid #eee;
+  transition: 0.3s;
+}
+.Customers-table table tbody tr td:last-child {
+  border-right: 1px solid #eee;
+}
+.btn-shape{
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.Customers-table table tbody button{
+  background-color: var(--green-color);
+}
+.Customers-table table tbody a{
+  background-color: var(--orange-color);
+}
+/*Help page */
+.help-box{
+  background-color: #fefefe;
+}
+.help-box img{
+  width: 720px;
+}
+.help-text-box h1{
+  margin-top: 35px;
+}
+.help-text-box>a,.card-container .card a{
+  display: inline-block;
+  background-color: #974EC3;
+  padding: 10px 20px;
+  border-radius: 25px;
+}
+.help-text-box>a:nth-child(4){
+  padding: 10px 35px 10px 35px;
+  border-radius: 25px;
+  border: 2px solid #974EC3;
+  color: black;
+  background-color: white;
+}
+.help-text-box>a:nth-child(4):hover{
+  background-color: #974EC3 ;
+  color: white;
+  border: 2px solid white;
+  font-weight: 700;
+  padding: 10px 20px 10px 20px;
+}
+.help-text-box>a:nth-child(3):hover{
+  padding: 10px 35px 10px 20px;
+  background-color: transparent;
+  border: 2px solid #974EC3;
+  color: black;
+  font-weight: 700;
+}
+.help-text-box>a:nth-child(3):hover~a:nth-child(4){
+  padding:10px 20px !important;
+}
+.help-text-box>p{
+margin-bottom: 30px;
+}
+.card-container .card{
+  width: 300px;
+  border: 2px solid #eee;
+}
+.card-container {
+  justify-content: space-evenly;
+}
+.card-container .card a:hover{
+  padding: 10px 20px;
+  background-color: transparent;
+  border: 2px solid #974EC3;
+  color: black;
+  font-weight: 700;
+}
+.card-container div:nth-child(2)> p:nth-child(3){
+  color: #974EC3;
+  font-weight: 600;
+}
+.card-container .card:hover{
+  background-color: #eee;
+}

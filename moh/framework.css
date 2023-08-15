@@ -1,0 +1,121 @@
+/* Display style */
+.d-flex{
+	display:flex;
+}
+.d-block{
+	display: block;
+}
+.align-center{
+	align-items: center;
+	display:flex;
+
+}
+.flex-wrap{
+	flex-wrap: wrap;
+}
+.justify-btw{
+	justify-content: space-between;
+}
+.justify-center{
+	justify-content: center;
+}
+.p-absloute{
+	position: absolute;
+}
+.p-relative{
+	position: relative;
+}
+/*Width*/
+.full-width{
+	width: 100%;
+}
+/*Font things*/
+.fs-14{
+	font-size: 14px;
+}
+.fs-25{
+	font-size: 25px;
+}
+.fw-400{
+	font-weight: 400;
+}
+.fw-500{
+	font-weight: 500;
+}
+.fw-600{
+	font-weight: 600;
+}
+.text-center{
+	text-align: center;
+}
+.black{
+	color: black;
+}
+.grey{
+	color:#888;
+}
+.white{
+	color: white;
+}
+.w-500{
+	font-weight: 500;
+}
+/*Padding and margin*/
+.p-20{
+	padding: 20px;
+}
+.m-20{
+	margin: 20px;
+}
+.p-10{
+	padding: 10px;
+}
+.m-10{
+	margin: 10px;
+}
+.mb-10{
+	margin-bottom: 10px;
+}
+.mt-10{
+	margin-top: 10px;
+}
+.ml-10{
+	margin-left: 10px;
+}
+.m-0{
+	margin: 0;
+}
+/*Border*/
+.border-none{
+	border: none;
+}
+.rad-6{
+	border-radius: 6px;
+}
+.rad-50{
+	border-radius: 50%;
+}
+/*Cursor-*/
+.pointer{
+	cursor: pointer;
+}
+/*Transition*/
+.trans{
+	transition: .4s ease;
+}
+/*Background*/
+.bg-white{
+	background-color: white !important;
+}
+.bg-red{
+	background-color: #f44336 !important;
+}
+.bg-grey{
+	background-color: #888;
+}
+.bg-eee{
+	background-color: #eee;
+}
+.bg-blue{
+	background-color: #0075ff !important;
+}
