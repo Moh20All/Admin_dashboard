@@ -19,6 +19,9 @@
 .justify-center{
 	justify-content: center;
 }
+.justify-evenly{
+	justify-content: space-evenly;
+}
 .p-absloute{
 	position: absolute;
 }
@@ -107,6 +110,9 @@
 .bg-white{
 	background-color: white !important;
 }
+.bg-yellow{
+	background-color: #f59e0b !important;
+}
 .bg-red{
 	background-color: #f44336 !important;
 }
@@ -118,4 +124,9 @@
 }
 .bg-blue{
 	background-color: #0075ff !important;
+}
+@media (max-width:768px) {
+	.d-block-mobile{
+		display: block;
+	}
 }
