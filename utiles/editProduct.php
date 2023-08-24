@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php 
+require "function.php";
 $server="localhost";
 $user="root";
 $dbname="store";
@@ -65,7 +66,7 @@ $pass="";//connection
             <label for="">Price:</label><br>
             <input type="number" name="price" value="<?php echo $row1['price']; ?>"><br>
             <label for="">Image:</label><br>
-            <input type="file" name="imag"><br>
+            <input type="file" name="imag[]" multiple><br>
             <input type="submit" value="Submit" name="submit" onclick="open_p()">
             <div class="popup" id="tab-p">
             <img src="img/mark.png" alt="">
@@ -80,40 +81,39 @@ $pass="";//connection
 <?php 
 $img = [];
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        if (isset($_POST['submit'])) {
-            $ID= $_POST["productId"];
-            $p_name=$_POST["pname"];
-            $descriptio = $_POST["description"];
-            $selectedCategoryId = $_POST["category"];
-            // Split the text into lines
-            $lines = explode("\n", $descriptio);
-            
-            // Trim whitespace from each line
-            $lines = array_map('trim', $lines);
-            
-            // Print the lines
-            foreach ($lines as $line) {
+     if (isset($_POST['submit'])) {
+                $uploaded = FALSE;
+                $ID= $_POST["productId"];
+                $p_name=$_POST["pname"];
+                $descriptio = $_POST["description"];
+                $selectedCategoryId = $_POST["category"];
+                // Split the text into lines
+                $lines = explode("\n", $descriptio);
                 
-            }
+                // Trim whitespace from each line
+                $lines = array_map('trim', $lines);
+                
 
-            $quantity = $_POST["quantity"];// Quantity
-            $price = $_POST["price"];// Price
-            if ($_FILES["imag"]["error"] > 0) {
-                echo "Error: " . $_FILES["image"]["error"];
-            }else{
-                $img = $_FILES["imag"]["name"];
+                $quantity = $_POST["quantity"];// Quantity
+                $price = $_POST["price"];// Price
+                $date = date("Y-m-d");//Date
+                if(isset($_FILES['imag']) && $_FILES['imag']['error'] !== UPLOAD_ERR_NO_FILE){
+                $uploaded = TRUE;
+                $img=image();
+                }
+        
+            if($uploaded){
+                $insertquery = "UPDATE `product` SET `product_name` = '$p_name', `description` = '$descriptio', `category_id` = '$selectedCategoryId', `quantity` = '$quantity', `price` = '$price' WHERE `product`.`product_id` = '$id';";
+            }else{    
+                $insertquery = "UPDATE `product` SET `product_name` = '$p_name', `description` = '$descriptio', `category_id` = '$selectedCategoryId', `quantity` = '$quantity', `price` = '$price' WHERE `product`.`product_id` = '$id';";
             }
-            $date = date("Y-m-d");
-            
-            $img ="../img/" . $img ;
-            $insertquery = "UPDATE `product` SET `product_name` = '$p_name', `description` = '$descriptio', `image` = '$img', `category_id` = '$selectedCategoryId', `quantity` = '$quantity', `price` = '$price' WHERE `product`.`product_id` = '$id';";
-            if ($conn->query($insertquery) === TRUE) {
-                echo "New Edit successfully";
-            }
-        }else{
-            echo "U didnt submit";
-        }
-    }else
+                if ($conn->query($insertquery) === TRUE) {
+                    echo "New Edit successfully";
+                    header("location:http://localhost/Store/pages/inventory.php");
+                    exit;
+                }
+    }
+}
 ?>
 <script >.
 let myElement=document.getElementById("tab-p");

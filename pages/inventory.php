@@ -8,8 +8,22 @@ $pass="";//connection
     if($conn->connect_error){//check conncetion
         die("Connection failed: " . $conn->connect_error);
     } 
+	if (isset($_GET["order"])) {
+		$order = $_GET["order"];
+		// Now you have the ID from the previous page
+		if($order=="low"){
+			$category = "SELECT * FROM product WHERE  quantity < 120 AND quantity > 0";
+		}
+		if($order=="out"){
+			$category = "SELECT * FROM product WHERE quantity = 0";
+		}
+		if($order=="high"){
+			$category = "SELECT * FROM product WHERE quantity >= 120";
+		}
+	}else{
 	// Fetch categories from the database
-    $category = "SELECT * FROM product";
+	$category = "SELECT * FROM product";
+	}
     $result_category = $conn->query($category);
     if ($result_category === false) {
         echo "Query execution failed: " . $conn->error;
@@ -85,17 +99,17 @@ $pass="";//connection
 						</div>
 						<div class="txt-container d-flex justify-btw align-center mt-10">							
 						<h1 class="m-0 mt-10"><?php echo $lowS;?></h2>
-						<a href=""><i class="fa-solid fa-arrow-right fs-25 white"></i></a>
+						<a href="?order=low"><i class="fa-solid fa-arrow-right fs-25 white"></i></a>
 						</div>
 					</div>
 					<div class="stat bg-red rad-6 mt-10">
 						<div class="txt-container d-flex justify-btw align-center" >
 							<h4 class="m-0">Out of stock</h4>
-							<i class="fa-regular fa-circle-xmark fs-15"></i>
+							<i class="fa-solid fa-store-slash"></i>
 						</div>
 							<div class="txt-container d-flex justify-btw align-center mt-10">
 							<h1 class="m-0 mt-10"><?php echo $outS;?></h2>
-							<a href=""><i class="fa-solid fa-arrow-right fs-25 white"></i></a>
+							<a href="?order=out"><i class="fa-solid fa-arrow-right fs-25 white"></i></a>
 							</div>
 					</div>
 					<div class="stat rad-6 mt-10">
@@ -105,7 +119,7 @@ $pass="";//connection
 						</div>
 							<div class="txt-container d-flex justify-btw align-center mt-10">
 							<h1 class=" m-0 "><?php echo $highS;?></h2>
-							<a href=""><i class="fa-solid fa-arrow-right fs-25 white"></i></a>
+							<a href="?order=high"><i class="fa-solid fa-arrow-right fs-25 white"></i></a>
 							</div>
 					</div>
 				</div>
@@ -119,6 +133,7 @@ $pass="";//connection
 					<div class="stock-table">
 						<table class="m-0 full-width">
 							<thead>
+								<th>No</th>
 								<th>Product Code</th>
 								<th style="width:350px;">Product</th>
 								<th>Status</th>
@@ -127,11 +142,14 @@ $pass="";//connection
 								<th>Quantity</th>
 							</thead>
 							<tbody>
-								<?php while ($row = $result_category->fetch_assoc()){ ?><tr>
+								<?php $i=0; while ($row = $result_category->fetch_assoc()){ ?><tr>
+									<?php $id = $row["product_id"];?>
+									<?php $image_urls_array = explode(",", $row["image"]);?>
+									<td class="fw-500"><?php echo $i;?></td>
 									<td class="fw-500"><?php echo $row["product_id"];?></td>
 									<td class="product-container align-center">
-											<img src="<?php echo $row["image"];?>" alt="">
-											<span><?php echo $row["product_name"];?></span>
+											<a href="<?php echo "product_detail/index.php?id=$id"?>"><img src="<?php echo "products/$id/".$image_urls_array[0];?>" alt=""></a>
+											<span><?php echo"<a href='product_detail/index.php?id=$id' >".$row["product_name"]."</a>" ;?></span>
 									</td>
 									<td class="fw-500">
 										<div class="align-center">
@@ -149,14 +167,14 @@ $pass="";//connection
 										
 
 									</td>
-									<?php $id = $row["product_id"];?>
 									
 
-									<td><?php echo "<a href='../utiles/editProduct.php?id=$id' class='btn-shape bg-blue'>Edit</a>";?></td>
+									<td><?php echo "<a href='../utiles/editProduct.php?id=$id' class='btn-shape bg-blue'>Edit</a>";?>
+									<?php echo "<a href='../utiles/deleteProduct.php?id=$id' class='btn-shape bg-red'><i class='fa-regular fa-trash-can'></i></a>";?></td>
 									<td class="fw-500"><?php echo $row["date"];?></td>
 									<td class="fw-500"><?php echo $row["quantity"];?></td>
 								</tr>
-								<?php }?>
+								<?php $i++; }?>
 								
 							</tbody>
 						</table>
